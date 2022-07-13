@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Sphere = () => {
+const Sphere = ({ color, position }) => {
     return (
-        <mesh>
+        <mesh position={position}>
             <sphereGeometry />
-            <meshStandardMaterial />
+            <meshStandardMaterial color={color} wireframe />
         </mesh>
     );
 };
