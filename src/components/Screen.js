@@ -22,21 +22,21 @@ const mesh = {
 
 const deg2rad = degrees => degrees * (Math.PI / 180);
 
-const Camera = ({ ...props }) => {
-    const camera = useRef();
+const Camera = ({ cameraRef, handleMove, ...props }) => {
+    // cameraRef = useRef();
 
     // window.addEventListener("mousemove", (event) => {
     //     cursor.x = event.clientX / sizes.width - 0.5;
     //     cursor.y = event.clientY / sizes.height - 0.5;
     // });
 
-    window.addEventListener("click", (event) => {
-        cursor.x = event.clientX / sizes.width - 0.5;
-        cursor.y = event.clientY / sizes.height - 0.5;
-        if (camera.current) {
-            // console.log(camera.current.position);
-        }
-    });
+    // window.addEventListener("click", (event) => {
+    //     cursor.x = event.clientX / sizes.width - 0.5;
+    //     cursor.y = event.clientY / sizes.height - 0.5;
+    //     if (cameraRef.current) {
+    //         // console.log(camera.current.position);
+    //     }
+    // });
 
     // useFrame(() => {
     //     if (camera.current) {
@@ -60,7 +60,8 @@ const Camera = ({ ...props }) => {
 
     return (
         <perspectiveCamera
-            ref={camera}
+            ref={cameraRef}
+            onPointerMove={(e) => handleMove(e)}
             fov={75}
             aspect={sizes.width / sizes.height}
             near={0.1}
@@ -72,7 +73,7 @@ const Camera = ({ ...props }) => {
 };
 
 
-function Dome({ name, position, texture, onClick, handleClick, cameraPostion }) {
+function Dome({ name, position, texture, onClick, handleMove, cameraDirection }) {
     const ref = useRef()
 
     // console.log(cameraPostion);
@@ -85,7 +86,8 @@ function Dome({ name, position, texture, onClick, handleClick, cameraPostion }) 
         <group>
             <mesh
                 // position={cameraPostion}
-                onClick={e => handleClick(e)}
+                // onClick={e => handleMove(e)}
+                
             // onClick={(e) => console.log(ref.current.position)}
             >
                 <sphereBufferGeometry ref={ref} args={[500, 60, 40]} />
